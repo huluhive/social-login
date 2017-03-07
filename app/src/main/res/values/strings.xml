@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GandF Login</string>
     <string name="facebook_app_id">124766421383481</string>
+    <string name="title_activity_logged">LoggedActivity</string>
 </resources>
