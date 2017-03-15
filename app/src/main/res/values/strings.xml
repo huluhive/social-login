@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">GandF Login</string>
     <string name="facebook_app_id">124766421383481</string>
+    <string name="title_activity_logged">LoggedActivity</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="signed_in">Signed in</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="signed_out">Signed out</string>
+
+    <string name="loading">Loading…</string>
+
 </resources>
