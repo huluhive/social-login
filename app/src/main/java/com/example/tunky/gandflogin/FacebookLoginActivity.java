@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,14 +21,15 @@ import com.facebook.share.widget.ShareDialog;
 
 import java.io.InputStream;
 
-public class LoggedActivity extends AppCompatActivity {
+public class FacebookLoginActivity extends AppCompatActivity {
 
     private ShareDialog shareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logged);
+
+        setContentView(R.layout.activity_facebook);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -38,14 +38,12 @@ public class LoggedActivity extends AppCompatActivity {
         String surname = inBundle.get("surname").toString();
         String imageUrl = inBundle.get("imageUrl").toString();
 
-        TextView nameView = (TextView)findViewById(R.id.nameAndSurname);
+        TextView nameView = (TextView) findViewById(R.id.nameAndSurname);
         nameView.setText("" + name + " " + surname);
 
-        new DownloadImage((ImageView)findViewById(R.id.profileImage)).execute(imageUrl);
+        new DownloadImage((ImageView) findViewById(R.id.profileImage)).execute(imageUrl);
 
         shareDialog = new ShareDialog(this);
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,12 +56,13 @@ public class LoggedActivity extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(getApplicationContext());
 
-        Button logout = (Button)findViewById(R.id.logout);
+        Button logout = (Button) findViewById(R.id.logout);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginManager.getInstance().logOut();
-                Intent login = new Intent(LoggedActivity.this, MainActivity.class);
+                Intent login = new Intent(FacebookLoginActivity.this, MainActivity.class);
                 startActivity(login);
                 finish();
             }
