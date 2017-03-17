@@ -19,6 +19,7 @@ public class ImageHelper {
         Canvas canvas = new Canvas(output);
         final float densityMultiplier = context.getResources().getDisplayMetrics().density;
 
+
         final int color = 0xff424242;
         final Paint paint = new Paint();
         final Rect rect = new Rect(0, 0, w, h);

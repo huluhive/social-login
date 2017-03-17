@@ -22,7 +22,6 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (fragment == null) {
-            fragment = new GPlusFragment();
+            fragment = new GooglePlusFragment();
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
@@ -153,14 +152,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void nextActivity(Profile profile) {
         if (profile != null) {
-            Intent main = new Intent(MainActivity.this, LoggedActivity.class);
+            Intent main = new Intent(MainActivity.this, FacebookLoginActivity.class);
             main.putExtra("name", profile.getFirstName());
             main.putExtra("surname", profile.getLastName());
             main.putExtra("imageUrl", profile.getProfilePictureUri(200, 200).toString());
             startActivity(main);
         }
     }
-
 
     @Override
     public void onStart() {

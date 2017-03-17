@@ -4,10 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -33,20 +31,16 @@ import com.google.android.gms.common.api.Status;
 import java.io.InputStream;
 
 
-public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
+public class GooglePlusFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "GPlusFragent";
     private int RC_SIGN_IN = 0;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton signInButton;
     private Button signOutButton;
-    private Button disconnectButton;
-    private LinearLayout signOutView;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
     private ImageView imgProfilePic;
-
-
 
 
     @Override
@@ -58,8 +52,8 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .enableAutoManage(getActivity(), this )
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .enableAutoManage(getActivity(), this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
 
@@ -91,15 +85,15 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_gplus, parent, false);
+        View v = inflater.inflate(R.layout.fragment_googleplus, parent, false);
 
         signInButton = (SignInButton) v.findViewById(R.id.sign_in_button);
         signOutButton = (Button) v.findViewById(R.id.sign_out_button);
         imgProfilePic = (ImageView) v.findViewById(R.id.img_profile_pic);
 
         mStatusTextView = (TextView) v.findViewById(R.id.status);
-        Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.user_default);
-        imgProfilePic.setImageBitmap(ImageHelper.getRoundedCornerBitmap(getContext(),icon, 200, 200, 200, false, false, false, false));
+        Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.user_default);
+        imgProfilePic.setImageBitmap(ImageHelper.getRoundedCornerBitmap(getContext(), icon, 200, 200, 200, false, false, false, false));
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +139,7 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
             GoogleSignInAccount acct = result.getSignInAccount();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
 
-            if(acct.getPhotoUrl() != null)
+            if (acct.getPhotoUrl() != null)
                 new LoadProfileImage(imgProfilePic).execute(acct.getPhotoUrl().toString());
 
             updateUI(true);
@@ -155,16 +149,14 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
     }
 
 
-
-
     private void updateUI(boolean signedIn) {
         if (signedIn) {
             signInButton.setVisibility(View.GONE);
             signOutButton.setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText(R.string.signed_out);
-            Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.user_default);
-            imgProfilePic.setImageBitmap(ImageHelper.getRoundedCornerBitmap(getContext(),icon, 200, 200, 200, false, false, false, false));
+            Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.user_default);
+            imgProfilePic.setImageBitmap(ImageHelper.getRoundedCornerBitmap(getContext(), icon, 200, 200, 200, false, false, false, false));
             signInButton.setVisibility(View.VISIBLE);
             signOutButton.setVisibility(View.GONE);
         }
@@ -218,8 +210,8 @@ public class GPlusFragment extends Fragment implements GoogleApiClient.OnConnect
             if (result != null) {
 
 
-                Bitmap resized = Bitmap.createScaledBitmap(result,200,200, true);
-                bmImage.setImageBitmap(ImageHelper.getRoundedCornerBitmap(getContext(),resized,250,200,200, false, false, false, false));
+                Bitmap resized = Bitmap.createScaledBitmap(result, 200, 200, true);
+                bmImage.setImageBitmap(ImageHelper.getRoundedCornerBitmap(getContext(), resized, 250, 200, 200, false, false, false, false));
 
             }
         }
