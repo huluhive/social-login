@@ -22,6 +22,11 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (fragment == null) {
             fragment = new GooglePlusFragment();
+
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();

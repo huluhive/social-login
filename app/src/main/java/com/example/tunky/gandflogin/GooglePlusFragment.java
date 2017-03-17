@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -30,7 +32,6 @@ import com.google.android.gms.common.api.Status;
 
 import java.io.InputStream;
 
-
 public class GooglePlusFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "GPlusFragent";
@@ -41,7 +42,6 @@ public class GooglePlusFragment extends Fragment implements GoogleApiClient.OnCo
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
     private ImageView imgProfilePic;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +94,7 @@ public class GooglePlusFragment extends Fragment implements GoogleApiClient.OnCo
         mStatusTextView = (TextView) v.findViewById(R.id.status);
         Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.user_default);
         imgProfilePic.setImageBitmap(ImageHelper.getRoundedCornerBitmap(getContext(), icon, 200, 200, 200, false, false, false, false));
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +148,6 @@ public class GooglePlusFragment extends Fragment implements GoogleApiClient.OnCo
             updateUI(false);
         }
     }
-
 
     private void updateUI(boolean signedIn) {
         if (signedIn) {
@@ -208,11 +208,8 @@ public class GooglePlusFragment extends Fragment implements GoogleApiClient.OnCo
         protected void onPostExecute(Bitmap result) {
 
             if (result != null) {
-
-
                 Bitmap resized = Bitmap.createScaledBitmap(result, 200, 200, true);
                 bmImage.setImageBitmap(ImageHelper.getRoundedCornerBitmap(getContext(), resized, 250, 200, 200, false, false, false, false));
-
             }
         }
     }
